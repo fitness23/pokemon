@@ -34,7 +34,7 @@
             <label for="abilities">By Abilities</label>
             <select id="abilities" formControlName="abilities" (change)="setSearchUrl('abilities')">
               <option [value]="null">Please select</option>
-              <option *ngFor="let pokemonAbility of pokemonAbilities" [value]="pokemonAbility.url">{{pokemonAbility.name | titlecase}}</option>
+              <option *ngFor="let pokemonAbility of pokemonAbilities$ | async" [value]="pokemonAbility.url">{{pokemonAbility.name | titlecase}}</option>
             </select>
           </li>
         </ol>

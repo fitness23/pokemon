@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
     items: Item[] = [];
 
     pokemonTypes$ = of([]) as Observable<Filter[]>
-    pokemonAbilities: Filter[] = [];
+    pokemonAbilities$ = of([]) as Observable<Filter[]>
 
     detail: Detail = {};
 
@@ -77,10 +77,7 @@ export class AppComponent implements OnInit {
 
       this.pokemonTypes$ = this.httpService.getTypes();
 
-      this.httpService.getAbilities()
-      .subscribe((res) => {
-          this.pokemonAbilities = res.body.results;
-      });
+      this.pokemonAbilities$ = this.httpService.getAbilities();
 
     };
 

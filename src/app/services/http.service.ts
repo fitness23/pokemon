@@ -18,8 +18,8 @@ export class HttpService {
         return this.http.get<Filter[]>(`${this.getApi()}/type`, { responseType: 'json', observe: 'response' }).pipe(map((res: any) => res.body.results));
     }
 
-    getAbilities(): Observable<any> {
-        return this.http.get(`${this.getApi()}/ability`, { responseType: 'json', observe: 'response' });
+    getAbilities(): Observable<Filter[]> {
+        return this.http.get<Filter[]>(`${this.getApi()}/ability`, { responseType: 'json', observe: 'response' }).pipe(map((res: any) => res.body.results));
     }
 
     getPokemonList(searchUrl: string): Observable<any> {
