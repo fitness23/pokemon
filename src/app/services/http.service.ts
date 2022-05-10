@@ -1,19 +1,21 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { Filter } from "../interfaces/filters-interface";
 
 @Injectable()
 export class HttpService {
 
     constructor(private http: HttpClient) { }
 
-    getApi()
-    {
+
+    
+    getApi(){
         return "https://pokeapi.co/api/v2/";
     }
 
-    getTypes(): Observable<any> {
-        return this.http.get("" + this.getApi() + "type", { responseType: 'json', observe: 'response' });
+    getTypes(): Observable<Filter[]> {
+        return this.http.get<Filter[]>("" + this.getApi() + "type", { responseType: 'json', observe: 'response' }).pipe(map((res: any) => res.body.results));
     }
 
     getAbilities(): Observable<any> {

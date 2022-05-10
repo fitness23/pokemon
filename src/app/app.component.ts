@@ -4,6 +4,7 @@ import { Item } from "./interfaces/items-interface";
 import { Detail } from "./interfaces/detail-interface";
 import { Filter } from "./interfaces/filters-interface";
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Observable, map, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,7 @@ export class AppComponent implements OnInit {
     currentSearchUrl: string = "";
     items: Item[] = [];
 
-    pokemonTypes: Filter[] = [];
+    pokemonTypes$ = of([]) as Observable<Filter[]>
     pokemonAbilities: Filter[] = [];
 
     detail: Detail = {};
@@ -74,10 +75,7 @@ export class AppComponent implements OnInit {
 
     populateFilterLists() {
 
-      this.httpService.getTypes()
-      .subscribe((res) => {
-          this.pokemonTypes = res.body.results;
-      });
+      this.pokemonTypes$ = this.httpService.getTypes();
 
       this.httpService.getAbilities()
       .subscribe((res) => {

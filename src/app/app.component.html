@@ -26,7 +26,7 @@
             <label for="types">By Types</label>
             <select id="types" formControlName="types" (change)="setSearchUrl('types')">
               <option [value]="null">Please select</option>
-              <option *ngFor="let pokemonType of pokemonTypes" [value]="pokemonType.url">{{pokemonType.name | titlecase}}</option>
+              <option *ngFor="let pokemonType of pokemonTypes$ | async" [value]="pokemonType.url">{{pokemonType.name | titlecase}}</option>
             </select>
           </li>
           <li><div class="divider">or</div></li>
