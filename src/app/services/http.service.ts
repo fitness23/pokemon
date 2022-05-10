@@ -15,11 +15,11 @@ export class HttpService {
     }
 
     getTypes(): Observable<Filter[]> {
-        return this.http.get<Filter[]>(`${this.getApi()}/type`, { responseType: 'json', observe: 'response' }).pipe(map((res: any) => res.body.results));
+        return this.http.get<Filter[]>(`${this.getApi()}/type`, { responseType: 'json' }).pipe(map((res: any) => res.results));
     }
 
     getAbilities(): Observable<Filter[]> {
-        return this.http.get<Filter[]>(`${this.getApi()}/ability`, { responseType: 'json', observe: 'response' }).pipe(map((res: any) => res.body.results));
+        return this.http.get<Filter[]>(`${this.getApi()}/ability`, { responseType: 'json' }).pipe(map((res: any) => res.results));
     }
 
     getPokemonList(searchUrl: string): Observable<any> {
