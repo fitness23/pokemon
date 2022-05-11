@@ -44,11 +44,13 @@
 
     <div class="content">
 
-        <div class="useSearch" *ngIf="items.length === 0">Please use the search to filter various Pokemon.</div>
-
-        <table class="standardTable" *ngIf="items.length > 0">
+        <table class="standardTable" *ngIf="(items$ | async)?.length !== 0; else loading">
               <tr><th>Name</th><th>View</th></tr>
-              <tr *ngFor="let item of items"><td>{{item.pokemon.name | titlecase}}</td><td><a class="viewPokemon" (click)="viewPokemon(item.pokemon.url)">View Pokemon Character</a></td></tr>
+              <tr *ngFor="let item of items$ | async"><td>{{item.pokemon.name | titlecase}}</td><td><a class="viewPokemon" (click)="viewPokemon(item.pokemon.url)">View Pokemon Character</a></td></tr>
         </table>
+
+        <ng-template #loading>
+          <div class="useSearch">Please use the search to filter various Pokemon.</div>
+        </ng-template>
 
     </div>

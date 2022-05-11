@@ -19,10 +19,10 @@ export class AppComponent implements OnInit {
     public myForm: FormGroup = this.fb.group({});
 
     currentSearchUrl: string = "";
-    items: Item[] = [];
+    items$ = of([]) as Observable<Item[]>;
 
-    pokemonTypes$ = of([]) as Observable<Filter[]>
-    pokemonAbilities$ = of([]) as Observable<Filter[]>
+    pokemonTypes$ = of([]) as Observable<Filter[]>;
+    pokemonAbilities$ = of([]) as Observable<Filter[]>;
 
     detail: Detail = {};
 
@@ -46,13 +46,11 @@ export class AppComponent implements OnInit {
 
   getData() {
 
-        this.httpService.getPokemonList(this.currentSearchUrl)
-            .subscribe((res) => {
-                this.items = res.body.pokemon;
-                console.log(this.items);
-            });
+    this.items$ = this.httpService.getPokemonList(this.currentSearchUrl);
 
     }
+
+
 
     setSearchUrl(fieldChanged: string){
       
