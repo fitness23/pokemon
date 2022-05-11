@@ -45,6 +45,11 @@
     float: left;
     width: 12em;
   }
+
+  @media #{c.$mobileView}
+  {
+    margin-bottom: 3em;
+  }
     
 
     .generalSearchOptionTitle{
@@ -107,6 +112,10 @@ table.standardTable {
       width: 12em;
     }
 
+    @media #{c.$mobileView}
+    {
+      margin-bottom: 3em;
+    }
 
     
     border: 2px dashed #FFFFFF;
