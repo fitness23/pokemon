@@ -8,10 +8,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HttpService } from "./services/http.service";
 import { HttpClientModule } from '@angular/common/http';
+import { SearchComponent } from './search.component';
+import { FireComponent } from './fire.component';
+import { WaterComponent } from './water.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SearchComponent,
+    FireComponent,
+    WaterComponent
   ],
   imports: [
     BrowserModule,

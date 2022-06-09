@@ -1,56 +1,11 @@
 <div id="logo"><img src="assets/logo.png" title="Pokeapi" /></div>
 
-<div id="detail" *ngIf="detail.name != null">
-  <div class="image"><img [src]="detail?.sprites?.front_default" [title]="detail?.name | titlecase" /></div>
-  <div class="stats">
-    <div class="name">Name: {{detail?.name | titlecase}}</div>
-    <div class="ability">Abilities:
-      <ul>
-        <li *ngFor="let ability of detail?.abilities">{{ability?.ability?.name | titlecase}}</li>
-      </ul>
-    </div>
-    <div class="move">Moves:
-      <ul>
-        <li *ngFor="let move of detail?.moves">{{move?.move?.name | titlecase}}</li>
-      </ul>
-    </div>
-  </div>
-</div>
+<nav>
+    <ul>
+        <li routerLinkActive="active"><a [routerLink]="['/search']">Search</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/fire']">Fire</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/water']">Water</a></li>
+    </ul>
+</nav>
 
-<form [formGroup]="myForm" novalidate class="generalForm">
-  <div class="generalSearchOption">
-    <div class="generalSearchOptionInner">
-        <div class="generalSearchOptionTitle">Search for Pokemon</div>
-        <ol>
-          <li class="selectQuestion">
-            <label for="types">By Types</label>
-            <select id="types" formControlName="types" (change)="setSearchUrl('types')">
-              <option [value]="null">Please select</option>
-              <option *ngFor="let pokemonType of pokemonTypes$ | async" [value]="pokemonType.url">{{pokemonType.name | titlecase}}</option>
-            </select>
-          </li>
-          <li><div class="divider">or</div></li>
-          <li class="selectQuestion">
-            <label for="abilities">By Abilities</label>
-            <select id="abilities" formControlName="abilities" (change)="setSearchUrl('abilities')">
-              <option [value]="null">Please select</option>
-              <option *ngFor="let pokemonAbility of pokemonAbilities$ | async" [value]="pokemonAbility.url">{{pokemonAbility.name | titlecase}}</option>
-            </select>
-          </li>
-        </ol>
-    </div>
-  </div>
-</form>
-
-    <div class="content">
-
-        <table class="standardTable" *ngIf="(items$ | async)?.length !== 0; else loading">
-              <tr><th>Name</th><th>View</th></tr>
-              <tr *ngFor="let item of items$ | async"><td>{{item.pokemon.name | titlecase}}</td><td><a class="viewPokemon" (click)="viewPokemon(item.pokemon.url)">View Pokemon Character</a></td></tr>
-        </table>
-
-        <ng-template #loading>
-          <div class="useSearch">Please use the search to filter various Pokemon.</div>
-        </ng-template>
-
-    </div>
+<router-outlet></router-outlet>
