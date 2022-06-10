@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DebugElement } from '@angular/core';
 import { HttpService } from "./services/http.service";
+import { Observable, map, of, tap } from 'rxjs';
 
 import { SearchComponent } from './search.component';
 
@@ -56,7 +57,7 @@ describe('SearchComponent', () => {
 
     spyOn(component, "viewPokemon")
 
-    component.items.push({"slot": 1, "pokemon": {"name": "my test name pokemon", "url": "a url"}});
+    component.items$=of([{"slot": 1, "pokemon": {"name": "my test name pokemon", "url": "a url"}}]);
     fixture.detectChanges();
 
     let buttonElement = fixture.debugElement.query(By.css('.viewPokemon'))

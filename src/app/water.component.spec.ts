@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { WaterComponent } from './water.component';
+import { HttpService } from "./services/http.service";
 
 describe('WaterComponent', () => {
   let component: WaterComponent;
@@ -14,8 +15,15 @@ describe('WaterComponent', () => {
   });
 
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      declarations: [WaterComponent],
+      providers: [
+        HttpService]
+    }).compileComponents();
     fixture = TestBed.createComponent(WaterComponent);
     component = fixture.componentInstance;
+    component.ngOnInit();
     fixture.detectChanges();
   });
 
