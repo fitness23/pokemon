@@ -1,19 +1,21 @@
-<div id="detail" *ngIf="detail?.name != null">
-    <div class="image"><img [src]="detail?.sprites?.front_default" [title]="detail?.name | titlecase" /></div>
-    <div class="stats">
-      <div class="name">Name: {{detail?.name | titlecase}}</div>
-      <div class="ability">Abilities:
-        <ul>
-          <li *ngFor="let ability of detail?.abilities">{{ability?.ability?.name | titlecase}}</li>
-        </ul>
+  <ng-container *ngIf="(specificPokemonDetail$ | async) as detail">
+    <div id="detail" *ngIf="detail?.name != null">
+      <div class="image"><img [src]="detail?.sprites?.front_default" [title]="detail?.name | titlecase" /></div>
+      <div class="stats">
+        <div class="name">Name: {{detail?.name | titlecase}}</div>
+        <div class="ability">Abilities:
+          <ul>
+            <li *ngFor="let ability of detail?.abilities">{{ability?.ability?.name | titlecase}}</li>
+          </ul>
+        </div>
+        <div class="move">Moves:
+          <ul>
+            <li *ngFor="let move of detail?.moves">{{move?.move?.name | titlecase}}</li>
+          </ul>
+        </div>
       </div>
-      <div class="move">Moves:
-        <ul>
-          <li *ngFor="let move of detail?.moves">{{move?.move?.name | titlecase}}</li>
-        </ul>
-      </div>
-    </div>
   </div>
+</ng-container>
   
   <form [formGroup]="myForm" novalidate class="generalForm">
     <div class="generalSearchOption">

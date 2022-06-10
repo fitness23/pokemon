@@ -63,10 +63,13 @@ export class HttpService {
       }
     
       getPokemonDetail(searchUrl: string): Observable<any> {
-        return this.http.get(searchUrl, {
-          responseType: 'json',
-          observe: 'response',
-        });
+        return this.http
+          .get<Filter[]>(`${searchUrl}`, { responseType: 'json' })
+          .pipe(
+            catchError((err) => {
+              return this.errorHandler(err);
+            })
+          );
       }
     
       errorHandler(error: HttpErrorResponse) {

@@ -4,7 +4,7 @@ import { Item } from "./interfaces/items-interface";
 import { Detail } from "./interfaces/detail-interface";
 import { Filter } from "./interfaces/filters-interface";
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable, map, of } from 'rxjs';
+import { Observable, map, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -23,7 +23,7 @@ export class SearchComponent implements OnInit {
     pokemonTypes$ = of([]) as Observable<Filter[]>;
     pokemonAbilities$ = of([]) as Observable<Filter[]>;
 
-    detail: Detail = {};
+    specificPokemonDetail$ = of({}) as Observable<Detail>;
 
 
 
@@ -79,12 +79,23 @@ export class SearchComponent implements OnInit {
     };
 
 
+    scrollPage(){
+      window.scroll({
+        top: 0, 
+        left: 0, 
+        behavior: 'smooth' 
+       });
+    }
+
+
     viewPokemon(pokemonUrl: string){
+
+      this.specificPokemonDetail$ = this.httpService.getPokemonDetail(pokemonUrl).pipe(tap(this.scrollPage));
       
-      this.httpService.getPokemonDetail(pokemonUrl)
+      /*this.httpService.getPokemonDetail(pokemonUrl)
             .subscribe((res) => {
               console.log(res.body);
-                this.detail = res.body;
+                this.detail$ = res.body;
                 
                 
                 window.scroll({
@@ -93,7 +104,7 @@ export class SearchComponent implements OnInit {
                   behavior: 'smooth' 
                  });
 
-            });
+            });*/
 
     }
 
