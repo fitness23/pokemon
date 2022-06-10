@@ -3,11 +3,11 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { share, timer, tap, map, ReplaySubject, pipe, shareReplay, BehaviorSubject, Observable, catchError, throwError, of } from 'rxjs';
 import { Filter } from '../interfaces/filters-interface';
 import { Item } from '../interfaces/items-interface';
+import { NgHttpCachingHeaders } from 'ng-http-caching';
+
 
 @Injectable()
 export class HttpService {
-
-    cachedWaterPokemons$?: Observable<Filter[]>;
 
     constructor(private http: HttpClient) {
     }
@@ -39,17 +39,18 @@ export class HttpService {
       }
     
       getWaterPokemon(): Observable<Filter[]> {
-        if (!this.cachedWaterPokemons$) {
-          this.cachedWaterPokemons$ = this.http
-            .get<Filter[]>(`${this.getApi()}/type/5`, { responseType: 'json' })
+        return this.http
+            .get<Filter[]>(`${this.getApi()}/type/5`,  { responseType: 'json', headers: {
+              [NgHttpCachingHeaders.LIFETIME]: (1000 * 10).toString(), // cache for 10 seconds
+            } })
             .pipe(
+              catchError((err) => {
+                return this.errorHandler(err);
+              }),
               map((clients: any) =>
                 clients.pokemon.map((client: any) => client.pokemon)
-              ),
-              shareReplay(1)
+              )
             );
-        }
-        return this.cachedWaterPokemons$;
       }
     
       getPokemonList(searchUrl: string): Observable<Item[]> {
