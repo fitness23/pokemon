@@ -1,1 +1,17 @@
-<p>fire works!</p>
+<p>
+    Press the button below to start an async call. You'll see it becoming disabled during async call data transfer:
+  </p>
+  <button type="button" ngx-disable-during-ajax (click)="getFirePokemon()">Get all Fire Pokemon</button>
+  
+  
+  
+  <div *ngIf="(items$ | async)?.length !== 0; else loading">
+  <p>Here are all the fire pokemon:</p>
+    <ul>
+      <li *ngFor="let item of items$ | async">{{item.name | titlecase}}</li>
+    </ul>
+  </div>
+  
+  <ng-template #loading>
+  <div style="margin-top: 20px;">Press the button above.</div>
+  </ng-template>

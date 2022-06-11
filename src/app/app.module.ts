@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgHttpCachingModule } from 'ng-http-caching';
+import { DisableDuringAjaxModule } from 'ngx-disable-during-ajax';
 
 import { HttpService } from "./services/http.service";
 import { HttpClientModule } from '@angular/common/http';
@@ -27,7 +28,8 @@ import { WaterComponent } from './water.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgHttpCachingModule
+    NgHttpCachingModule,
+    DisableDuringAjaxModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]

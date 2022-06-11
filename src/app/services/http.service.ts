@@ -11,6 +11,10 @@ export class HttpService {
 
     constructor(private http: HttpClient) {
     }
+
+    getDelayApi(){
+      return "https://deelay.me/1000/";
+    }
     
     getApi(){
         return "https://pokeapi.co/api/v2";
@@ -43,6 +47,19 @@ export class HttpService {
             .get<Filter[]>(`${this.getApi()}/type/5`,  { responseType: 'json', headers: {
               [NgHttpCachingHeaders.LIFETIME]: (1000 * 10).toString(), // cache for 10 seconds
             } })
+            .pipe(
+              catchError((err) => {
+                return this.errorHandler(err);
+              }),
+              map((clients: any) =>
+                clients.pokemon.map((client: any) => client.pokemon)
+              )
+            );
+      }
+
+      getFirePokemon(): Observable<Filter[]> {
+        return this.http
+            .get<Filter[]>(`${this.getDelayApi()}${this.getApi()}/type/6`,  { responseType: 'json' })
             .pipe(
               catchError((err) => {
                 return this.errorHandler(err);
