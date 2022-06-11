@@ -59,7 +59,7 @@ export class HttpService {
 
       getFirePokemon(): Observable<Filter[]> {
         return this.http
-            .get<Filter[]>(`${this.getDelayApi()}${this.getApi()}/type/6`,  { responseType: 'json' })
+            .get<Filter[]>(`${this.getDelayApi()}${this.getApi()}/type/10`,  { responseType: 'json' })
             .pipe(
               catchError((err) => {
                 return this.errorHandler(err);
