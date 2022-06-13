@@ -44,7 +44,7 @@ export class HttpService {
     
       getWaterPokemon(): Observable<Filter[]> {
         return this.http
-            .get<Filter[]>(`${this.getApi()}/type/5`,  { responseType: 'json', headers: {
+            .get<Filter[]>(`${this.getApi()}/type/11`,  { responseType: 'json', headers: {
               [NgHttpCachingHeaders.LIFETIME]: (1000 * 10).toString(), // cache for 10 seconds
             } })
             .pipe(
