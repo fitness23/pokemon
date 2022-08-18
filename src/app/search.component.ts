@@ -23,7 +23,7 @@ export class SearchComponent implements OnInit {
     pokemonTypes$ = of([]) as Observable<Filter[]>;
     pokemonAbilities$ = of([]) as Observable<Filter[]>;
 
-    specificPokemonDetail$ = of({}) as Observable<Detail>;
+    specificPokemonDetail$ = of() as Observable<Detail>; // Creates empty Observable -- https://www.codegrepper.com/code-examples/typescript/return+empty+observable+angular+8. 
 
 
 

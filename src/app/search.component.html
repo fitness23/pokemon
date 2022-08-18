@@ -1,5 +1,5 @@
   <ng-container *ngIf="(specificPokemonDetail$ | async) as detail">
-    <div id="detail" *ngIf="detail?.name != null">
+    <div id="detail">
       <div class="image"><img [src]="detail?.sprites?.front_default" [title]="detail?.name | titlecase" /></div>
       <div class="stats">
         <div class="name">Name: {{detail?.name | titlecase}}</div>
